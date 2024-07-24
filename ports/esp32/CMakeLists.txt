@@ -74,5 +74,14 @@ list(APPEND EXTRA_COMPONENT_DIRS main_${IDF_TARGET})
 # Enable the panic handler wrapper
 idf_build_set_property(LINK_OPTIONS "-Wl,--wrap=esp_panic_handler" APPEND)
 
+set(MEMFAULT_PLATFORM_PORT_COMPONENTS main_esp32)
+get_filename_component(MEMFAULT_FIRMWARE_SDK third-party/memfault-firmware-sdk ABSOLUTE)
+include(${MEMFAULT_FIRMWARE_SDK}/ports/esp_idf/memfault.cmake)
+
 # Define the project.
 project(micropython)
+
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME}.elf
+  POST_BUILD
+  COMMAND
+  python ${MEMFAULT_FIRMWARE_SDK}/scripts/fw_build_id.py ${CMAKE_PROJECT_NAME}.elf)
