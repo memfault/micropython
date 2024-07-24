@@ -68,3 +68,6 @@
 [submodule "lib/arduino-lib"]
 	path = lib/arduino-lib
 	url = https://github.com/arduino/arduino-lib-mpy.git
+[submodule "ports/esp32/third-party/memfault-firmware-sdk"]
+	path = ports/esp32/third-party/memfault-firmware-sdk
+	url = https://github.com/memfault/memfault-firmware-sdk.git
